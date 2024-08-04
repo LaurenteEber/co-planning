@@ -17,6 +17,7 @@ dist/
 .vscode/
 .idea/
 *.DS_Store
+sincronizacion_regular.text
 
 # .env
 .env
