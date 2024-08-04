@@ -1,0 +1,22 @@
+# Python
+*.pyc
+__pycache__/
+
+# Node
+node_modules/
+dist/
+
+# Docker
+*.log
+*.env
+
+# DVC
+.dvc/
+
+# Otros
+.vscode/
+.idea/
+*.DS_Store
+
+# .env
+.env
