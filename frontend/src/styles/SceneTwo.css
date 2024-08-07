@@ -1,0 +1,17 @@
+.SceneTwo {
+  display: flex;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+.left-panel {
+  width: 25%;
+  background-color: #E9ECEF;
+  padding: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.right-panel {
+  flex-grow: 1;
+  padding: 20px;
+}
