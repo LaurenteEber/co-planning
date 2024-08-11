@@ -7,7 +7,7 @@ export function TextArea({ label, name, value, onChange }) {
         id={name}
         value={value}
         onChange={onChange}
-        rows="4" // Adjust the number of rows as needed
+        rows="4" // Adjust the number of rows as we need
         style={{ width: '100%' }}
       />
     </div>

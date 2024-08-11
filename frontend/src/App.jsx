@@ -1,13 +1,13 @@
-import './styles/App.css';
 import { useState } from 'react';
 import { SceneOne } from './components/SceneOne';
 import { SceneTwo } from './components/SceneTwo';
+import './styles/App.css';
 
 export function App() {
   const [currentScene, setCurrentScene] = useState(1);
-  const [formData, setFormData] = useState({ name: '', mission: '' });
+  const [formData, setFormData] = useState({ pliego: '', mission: '' });
 
-  const handleSceneChange = () => setCurrentScene(2);
+  const handleGoSceneTwo = () => setCurrentScene(2);
   const handleGoBack = () => setCurrentScene(1);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,7 +17,7 @@ export function App() {
     <div className="App">
       {currentScene === 1 ? (
         <SceneOne
-          onFormSubmit={handleSceneChange}
+          onFormSubmit={handleGoSceneTwo}
           onChange={handleChange}
           formData={formData}
         />

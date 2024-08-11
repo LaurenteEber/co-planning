@@ -5,7 +5,7 @@ import '../styles/SceneOne.css';
 
 export function SceneOne({ onFormSubmit, onChange, formData }) {
   const handleSubmit = () => {
-    if (!formData.name || !formData.mission) {
+    if (!formData.pliego || !formData.mission) {
       alert('Por favor ingrese la información completa');
       return;
     }
@@ -17,8 +17,8 @@ export function SceneOne({ onFormSubmit, onChange, formData }) {
       <h1>Bienvenido a Co-planning, su asistente en la formulación de indicadores</h1>
       <TextInput
         label="Nombre de pliego"
-        name="name"
-        value={formData.name}
+        name="pliego"
+        value={formData.pliego}
         onChange={onChange}
       />
       <TextArea
