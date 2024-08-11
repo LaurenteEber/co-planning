@@ -1,17 +1,23 @@
+@import './variables.css';
+
 .SceneTwo {
   display: flex;
-  max-width: 1000px;
-  margin: 20px auto;
+  max-width: var(--max-width-wide);
+  margin: var(--spacing-medium) auto;
 }
 
 .left-panel {
   width: 25%;
-  background-color: #E9ECEF;
-  padding: 20px;
+  background-color: var(--panel-bg);
+  padding: var(--spacing-medium);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px 0 0 8px;
 }
 
 .right-panel {
   flex-grow: 1;
-  padding: 20px;
+  padding: var(--spacing-medium);
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 0 8px 8px 0;
 }

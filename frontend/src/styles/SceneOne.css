@@ -1,4 +1,15 @@
+@import './variables.css';
+
 .SceneOne {
-  max-width: 600px;
-  margin: 20px auto;
+  max-width: var(--max-width-narrow);
+  margin: var(--spacing-medium) auto;
+  padding: var(--spacing-medium);
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.SceneOne h1 {
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-medium);
 }

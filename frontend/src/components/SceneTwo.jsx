@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Button } from './Button';
-import { IndicatorSelector } from './IndicatorSelector';
+import { FormPlanningData } from './FormPlanningData';
 import { IndicatorResults } from './IndicatorResults';
 import '../styles/SceneTwo.css';
 
 export function SceneTwo({ onGoBack, formData }) {
-  const [indicators, setIndicators] = useState(
+  const [planningData, setPlanningData] = useState(
     { 
       selection: '', 
       inputs: { products: [] } 
@@ -18,38 +18,40 @@ export function SceneTwo({ onGoBack, formData }) {
   };
 
   const handleShowResults = () => {
-    if (!needsUpdate) {
       setShowResults(true);
-      setNeedsUpdate(false);
-    }    
+      setNeedsUpdate(false); 
   };
 
-  const handleIndicatorChange = (newSelection, newInputs) => {
-    if (newSelection !== indicators.selection) {
+  const handlePlanningDataChange = (newSelection, newInputs) => {
+    if (newSelection !== planningData.selection) {
       setShowResults(false);
-      setNeedsUpdate(false);
     }
-    setIndicators({ selection: newSelection, inputs: newInputs });
+    if (newInputs !== planningData.inputs) {
+      setNeedsUpdate(true);
+      setShowResults(false);
+    }
+    setPlanningData({ selection: newSelection, inputs: newInputs });
     if (showResults) {
-      setNeedsUpdate(true)
+      setNeedsUpdate(false);
     }
   };
 
   return (
     <div className="SceneTwo">
       <div className="left-panel">
-        <p><strong>Pliego:</strong> {formData.pliego}</p>
+        <h2>Información del pliego</h2>
+        <p><strong>Nombre:</strong> {formData.pliego}</p>
         <p><strong>Misión:</strong> {formData.mission}</p>
         <Button label="Volver" onClick={handleBack} />
       </div>
       <div className="right-panel">
         <h2>Seleccione e ingrese información</h2>
-        <IndicatorSelector onSelectionChange={handleIndicatorChange} />
+        <FormPlanningData onSelectionChange={handlePlanningDataChange} />
         {needsUpdate && 
           <p style={{color: 'red' }}>
             Hay cambios sin enviar. Por favor, vuelva a hacer clic en <strong>Enviar</strong> para actualizar las recomendaciones.
           </p>}
-        {showResults && <IndicatorResults indicators={indicators} />}
+        {showResults && <IndicatorResults indicators={planningData} />}
         <Button label="Enviar" onClick={handleShowResults} />
       </div>
     </div>

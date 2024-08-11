@@ -1,8 +1,9 @@
-/* src/styles/App.css */
+@import './variables.css';
+
 .App {
   font-family: 'Arial', sans-serif;
-  color: #333;
-  background-color: #F8F9FA;
+  color: var(--text-color);
+  background-color: var(--background-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,17 +11,17 @@
 }
 
 input, textarea, select, button {
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  padding: var(--spacing-small);
+  margin: var(--spacing-small) 0;
+  /* margin-bottom: 5px; */
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
 }
 
 button {
-  background-color: #007BFF;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   cursor: pointer;
@@ -28,15 +29,14 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-color);
 }
 
 .footer {
   width: 100%;
-  background-color: #f1f1f1;
+  background-color: var(--footer-bg);
   text-align: center;
-  padding: 10px 0;
-  position: absolute;
-  bottom: 0;
+  padding: var(--spacing-small) 0;
   font-size: 0.8em;
+  margin-top: auto;
 }
