@@ -1,4 +1,6 @@
-export function TextInput({ label, name, value, onChange }) {
+import React from "react";
+
+export const TextInput = React.forwardRef(({ label, name, ...rest }, ref) => {
   return (
     <div className="input-group">
       <label htmlFor={name}>{label}</label>
@@ -6,9 +8,11 @@ export function TextInput({ label, name, value, onChange }) {
         type="text"
         name={name}
         id={name}
-        value={value}
-        onChange={onChange}
+        ref={ref}
+        {...rest}
       />
     </div>
   );
-}
+})
+
+TextInput.displayName = "TextInput";

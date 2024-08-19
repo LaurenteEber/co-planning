@@ -11,29 +11,14 @@ export function SceneTwo({ onGoBack, formData }) {
       inputs: { products: [] } 
     });
   const [showResults, setShowResults] = useState(false);
-  const [needsUpdate, setNeedsUpdate] = useState(false);
 
   const handleBack = () => {
     onGoBack();
   };
 
-  const handleShowResults = () => {
-      setShowResults(true);
-      setNeedsUpdate(false); 
-  };
-
-  const handlePlanningDataChange = (newSelection, newInputs) => {
-    if (newSelection !== planningData.selection) {
-      setShowResults(false);
-    }
-    if (newInputs !== planningData.inputs) {
-      setNeedsUpdate(true);
-      setShowResults(false);
-    }
-    setPlanningData({ selection: newSelection, inputs: newInputs });
-    if (showResults) {
-      setNeedsUpdate(false);
-    }
+  const handleDataSubmit = (newSelection, newData) => {
+    setPlanningData({ selection: newSelection, inputs: newData });
+    setShowResults(true);
   };
 
   return (
@@ -46,13 +31,10 @@ export function SceneTwo({ onGoBack, formData }) {
       </div>
       <div className="right-panel">
         <h2>Seleccione e ingrese información</h2>
-        <FormPlanningData onSelectionChange={handlePlanningDataChange} />
-        {needsUpdate && 
-          <p style={{color: 'red' }}>
-            Hay cambios sin enviar. Por favor, vuelva a hacer clic en <strong>Enviar</strong> para actualizar las recomendaciones.
-          </p>}
+        <FormPlanningData 
+          onDataSubmit={handleDataSubmit}
+        />
         {showResults && <IndicatorResults indicators={planningData} />}
-        <Button label="Enviar" onClick={handleShowResults} />
       </div>
     </div>
   );
