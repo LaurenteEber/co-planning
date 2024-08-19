@@ -1,0 +1,17 @@
+@import 'variables.css';
+
+.form-planning-data select {
+  margin-bottom: var(--spacing-medium);
+}
+
+.form-planning-data h4 {
+  margin-top: var(--spacing-medium);
+  color: var(--primary-color);
+}
+
+.product-section {
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-small);
+  margin-bottom: var(--spacing-small);
+  border-radius: 4px;
+}
