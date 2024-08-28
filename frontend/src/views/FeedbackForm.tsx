@@ -1,23 +1,37 @@
-import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
-import { Label } from "./ui/label"
-import { Textarea } from "./ui/textarea"
-import { Button } from "./ui/button"
+import React from 'react';
+import { Card, CardContent, Typography, TextField, Button, Container, Box } from '@mui/material';
 
 const FeedbackForm = () => (
-  <Card className="w-full max-w-4xl mx-auto">
-    <CardHeader>
-      <CardTitle>Recomendaciones de mejora para Co-Planning</CardTitle>
-      <CardDescription>Ayúdenos a mejorar nuestra aplicación</CardDescription>
-    </CardHeader>
-    <CardContent>
-      <div className="space-y-4">
-        <Label htmlFor="feedback">Sus recomendaciones</Label>
-        <Textarea id="feedback" placeholder="Escriba sus recomendaciones aquí..." />
-        <Button>Enviar Recomendaciones</Button>
-      </div>
-    </CardContent>
-  </Card>
-)
+  <Container maxWidth="md">
+    <Box my={4}>
+      <Card className="w-full mx-auto">
+        <CardContent>
+          <Typography variant="h5" component="h2" gutterBottom>
+            Recomendaciones de mejora para Co-Planning
+          </Typography>
+          <Typography variant="body2" color="textSecondary" gutterBottom>
+            Ayúdenos a mejorar nuestra aplicación
+          </Typography>
+          <Box mt={2}>
+            <TextField
+              id="feedback"
+              label="Sus recomendaciones"
+              multiline
+              rows={4}
+              variant="outlined"
+              fullWidth
+              placeholder="Escriba sus recomendaciones aquí..."
+            />
+          </Box>
+          <Box mt={2}>
+            <Button variant="contained" color="primary">
+              Enviar Recomendaciones
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
+  </Container>
+);
 
-export default FeedbackForm
+export default FeedbackForm;

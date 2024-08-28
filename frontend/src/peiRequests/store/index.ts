@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import oeiSliceReducer from './recomendationRequest/oeiSlice';
 import aeiSliceReducer from './recomendationRequest/aeiSlice';
 import entitySliceReducer from './entitySilce';
+import navigationSliceReducer from './navigationSlice';
 
 /* Middlewares */
 
@@ -9,7 +10,8 @@ export const store = configureStore({
   reducer: {
     oeiRequest: oeiSliceReducer,
     aeiRequest: aeiSliceReducer,
-    entityEnter: entitySliceReducer
+    entityEnter: entitySliceReducer,
+    navigation: navigationSliceReducer
   }
 })
 

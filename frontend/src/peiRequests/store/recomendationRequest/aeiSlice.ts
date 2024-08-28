@@ -4,17 +4,17 @@ import { Entity } from "../../../generalTypes/entityType"
 
 export type AEIRequestType = number
 
-export interface AEIRecomendationRequest {
+export interface AEIRecommendationRequest {
   entity: Entity
   aeiData: AEIData
   indicatorsResponse: IndicatorsResponse
 }
 
-export interface AEIRecomendationRequestWithId extends AEIRecomendationRequest {
+export interface AEIRecommendationRequestWithId extends AEIRecommendationRequest {
   id: AEIRequestType
 }
 
-const initialState: AEIRecomendationRequestWithId = {
+const initialState: AEIRecommendationRequestWithId = {
   id: 0,
   entity: {
     planType: 'PEI',

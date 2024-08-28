@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { 
   Typography, 
   TextField, 
@@ -9,19 +9,47 @@ import {
   Button, 
   Container, 
   Box, 
-  Grid 
+  Grid,
+  FormControl,
+  InputLabel,
+  FormHelperText
 } from '@mui/material';
 import { Entity } from '../generalTypes/entityType';
 import { setEntity } from '../peiRequests/store/entitySilce';
+import { setCurrentView } from '../peiRequests/store/navigationSlice';
+import { RootState } from '../peiRequests/store';
+import PEIRequestsManager from '../peiRequests/PEIRequestsManager';
+
+const validateYear = (value: string) => {
+  const numValue = Number(value);
+  return (numValue > 2020 && numValue < 2050) || 'Año no soportado';
+};
+
+const validateEndYear = (startYear: string, endYear: string) => {
+  const start = Number(startYear);
+  const end = Number(endYear);
+  if (end <= start + 2) {
+    return 'El año de fin debe ser al menos 3 años mayor que el año de inicio';
+  }
+  return validateYear(endYear);
+};
 
 const MainView: React.FC = () => {
-  const { control, handleSubmit } = useForm<Entity>();
+  const { control, handleSubmit, watch } = useForm<Entity>();
   const dispatch = useDispatch();
+  const [showUnsupportedMessage, setShowUnsupportedMessage] = useState(false);
+  const currentView = useSelector((state: RootState) => state.navigation.currentView);
+
+  const planType = watch('planType');
 
   const onSubmit = (data: Entity) => {
     dispatch(setEntity(data));
-    // Aquí puedes agregar la lógica para navegar a la siguiente vista
+    dispatch(setCurrentView('peiRequests'));
   };
+
+  if (currentView === 'peiRequests') {
+    return <PEIRequestsManager />;
+  }
 
   return (
     <Container maxWidth="md">
@@ -35,105 +63,128 @@ const MainView: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Controller
-                name="planType"
-                control={control}
-                defaultValue=""
-                rules={{ required: 'Este campo es requerido' }}
-                render={({ field, fieldState: { error } }) => (
-                  <Select
-                    {...field}
-                    fullWidth
-                    displayEmpty
-                    error={!!error}
-                    label="Tipo de Plan"
-                  >
-                    <MenuItem value="" disabled>Seleccione el tipo de plan</MenuItem>
-                    <MenuItem value="PN">PN</MenuItem>
-                    <MenuItem value="PESEM">PESEM</MenuItem>
-                    <MenuItem value="PDRC">PDRC</MenuItem>
-                    <MenuItem value="PDLC-P">PDLC-P</MenuItem>
-                    <MenuItem value="PDLC-D">PDLC-D</MenuItem>
-                    <MenuItem value="PEI">PEI</MenuItem>
-                  </Select>
+              <FormControl fullWidth error={showUnsupportedMessage}>
+                <InputLabel id="plan-type-label">Tipo de Plan</InputLabel>
+                <Controller
+                  name="planType"
+                  control={control}
+                  defaultValue=""
+                  rules={{ required: 'Este campo es requerido' }}
+                  render={({ field, fieldState: { error } }) => (
+                    <Select
+                      {...field}
+                      labelId="plan-type-label"
+                      label="Tipo de Plan"
+                      error={!!error || showUnsupportedMessage}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        setShowUnsupportedMessage(e.target.value !== 'PEI' && e.target.value !== '');
+                      }}
+                    >
+                      <MenuItem value="" disabled>Seleccione el tipo de plan</MenuItem>
+                      <MenuItem value="PN">PN</MenuItem>
+                      <MenuItem value="PESEM">PESEM</MenuItem>
+                      <MenuItem value="PDRC">PDRC</MenuItem>
+                      <MenuItem value="PDLC-P">PDLC-P</MenuItem>
+                      <MenuItem value="PDLC-D">PDLC-D</MenuItem>
+                      <MenuItem value="PEI">PEI</MenuItem>
+                    </Select>
+                  )}
+                />
+                {showUnsupportedMessage && (
+                  <FormHelperText>
+                    Lo sentimos, actualmente solo damos soporte al PEI. Estamos trabajando para dar soporte a más planes en el futuro.
+                  </FormHelperText>
                 )}
-              />
+              </FormControl>
             </Grid>
-            <Grid item xs={6}>
-              <Controller
-                name="planHorizon.startYear"
-                control={control}
-                defaultValue=""
-                rules={{ required: 'Este campo es requerido' }}
-                render={({ field, fieldState: { error } }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    label="Año de inicio"
-                    error={!!error}
-                    helperText={error?.message}
+            {planType === 'PEI' && (
+              <>
+                <Grid item xs={6}>
+                  <Controller
+                    name="planHorizon.startYear"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: 'Este campo es requerido',
+                      validate: validateYear
+                    }}
+                    render={({ field, fieldState: { error } }) => (
+                      <TextField
+                        {...field}
+                        fullWidth
+                        label="Año de inicio"
+                        error={!!error}
+                        helperText={error?.message}
+                        type="number"
+                      />
+                    )}
                   />
-                )}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Controller
-                name="planHorizon.endYear"
-                control={control}
-                defaultValue=""
-                rules={{ required: 'Este campo es requerido' }}
-                render={({ field, fieldState: { error } }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    label="Año de fin"
-                    error={!!error}
-                    helperText={error?.message}
+                </Grid>
+                <Grid item xs={6}>
+                  <Controller
+                    name="planHorizon.endYear"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: 'Este campo es requerido',
+                      validate: (value) => validateEndYear(watch('planHorizon.startYear'), value)
+                    }}
+                    render={({ field, fieldState: { error } }) => (
+                      <TextField
+                        {...field}
+                        fullWidth
+                        label="Año de fin"
+                        error={!!error}
+                        helperText={error?.message}
+                        type="number"
+                      />
+                    )}
                   />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Controller
-                name="name"
-                control={control}
-                defaultValue=""
-                rules={{ required: 'Este campo es requerido' }}
-                render={({ field, fieldState: { error } }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    label="Nombre de la Entidad"
-                    error={!!error}
-                    helperText={error?.message}
+                </Grid>
+                <Grid item xs={12}>
+                  <Controller
+                    name="name"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: 'Este campo es requerido' }}
+                    render={({ field, fieldState: { error } }) => (
+                      <TextField
+                        {...field}
+                        fullWidth
+                        label="Nombre de la Entidad"
+                        error={!!error}
+                        helperText={error?.message}
+                      />
+                    )}
                   />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Controller
-                name="mission"
-                control={control}
-                defaultValue=""
-                rules={{ required: 'Este campo es requerido' }}
-                render={({ field, fieldState: { error } }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    multiline
-                    rows={4}
-                    label="Misión de la Entidad"
-                    error={!!error}
-                    helperText={error?.message}
+                </Grid>
+                <Grid item xs={12}>
+                  <Controller
+                    name="mission"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: 'Este campo es requerido' }}
+                    render={({ field, fieldState: { error } }) => (
+                      <TextField
+                        {...field}
+                        fullWidth
+                        multiline
+                        rows={4}
+                        label="Misión de la Entidad"
+                        error={!!error}
+                        helperText={error?.message}
+                      />
+                    )}
                   />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary">
-                Continuar
-              </Button>
-            </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button type="submit" variant="contained" color="primary">
+                    Continuar
+                  </Button>
+                </Grid>
+              </>
+            )}
           </Grid>
         </form>
       </Box>

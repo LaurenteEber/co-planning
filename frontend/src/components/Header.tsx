@@ -1,20 +1,25 @@
-import { LayoutDashboard } from 'lucide-react'
-import { Button } from "./ui/button"
+import React from 'react';
+import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { LayoutDashboard } from 'lucide-react';
 
 const Header = ({ toggleView, currentView }: { toggleView: () => void, currentView: string }) => (
-  <header className="bg-primary text-primary-foreground p-4 flex items-center justify-between">
-    <div className="flex items-center">
-      <LayoutDashboard className="mr-2 h-6 w-6" />
-      <h1 className="text-2xl font-bold">Co-Planning</h1>
-    </div>
-    <Button 
-      variant="secondary" 
-      onClick={toggleView}
-      className="text-primary-foreground bg-primary-foreground/10 hover:bg-primary-foreground/20"
-    >
-      {currentView === 'main' ? 'Recomendaciones de mejora' : 'Volver a la aplicación'}
-    </Button>
-  </header>
-)
+  <AppBar position="static" className="bg-primary">
+    <Toolbar className="flex justify-between">
+      <Box className="flex items-center">
+        <LayoutDashboard className="mr-2 h-6 w-6" />
+        <Typography variant="h6" component="h1" className="font-bold">
+          Co-Planning
+        </Typography>
+      </Box>
+      <Button 
+        variant="contained" 
+        onClick={toggleView}
+        className="bg-white text-primary hover:bg-white/90"
+      >
+        {currentView === 'main' ? 'Sugerencias de mejora' : 'Volver a la aplicación'}
+      </Button>
+    </Toolbar>
+  </AppBar>
+);
 
-export default Header
+export default Header;
