@@ -9,13 +9,12 @@ import Tooltip from '@mui/material/Tooltip';
 
 interface AEIFormProps {
   onSubmit: (data: AEIData) => void;
+  initialData: AEIData;
 }
 
-const AEIForm: React.FC<AEIFormProps> = ({ onSubmit }) => {
+const AEIForm: React.FC<AEIFormProps> = ({ onSubmit, initialData }) => {
   const { control, handleSubmit } = useForm<AEIData>({
-    defaultValues: {
-      products: [{ denomination: '', targetPopulation: '', qualityCriteria: '' }]
-    }
+    defaultValues: initialData
   });
   const { fields, append, remove } = useFieldArray({
     control,

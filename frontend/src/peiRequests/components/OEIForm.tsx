@@ -5,10 +5,13 @@ import { OEIData } from '../types/peiType';
 
 interface OEIFormProps {
   onSubmit: (data: OEIData) => void;
+  initialData: OEIData;
 }
 
-const OEIForm: React.FC<OEIFormProps> = ({ onSubmit }) => {
-  const { control, handleSubmit } = useForm<OEIData>();
+const OEIForm: React.FC<OEIFormProps> = ({ onSubmit, initialData }) => {
+  const { control, handleSubmit } = useForm<OEIData>({
+    defaultValues: initialData
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

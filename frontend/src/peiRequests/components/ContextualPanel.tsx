@@ -1,12 +1,12 @@
 import React from 'react';
-import { Entity } from '../../generalTypes/entityType';
+import { PlanningInstrument } from '../../generalTypes/planningInstrumentType';
 import { Box, Typography, Divider, Paper } from '@mui/material';
 
 interface ContextualPanelProps {
-  entity: Entity;
+  planningInstrument: PlanningInstrument;
 }
 
-const ContextualPanel: React.FC<ContextualPanelProps> = ({ entity }) => {
+const ContextualPanel: React.FC<ContextualPanelProps> = ({ planningInstrument }) => {
   return (
     <Paper
       elevation={3}
@@ -23,16 +23,16 @@ const ContextualPanel: React.FC<ContextualPanelProps> = ({ entity }) => {
         <Typography variant="h6" gutterBottom color="primary">
           Entidad formuladora
         </Typography>
-        <Typography variant="body2"><strong>Nombre:</strong> {entity.name}</Typography>
+        <Typography variant="body2"><strong>Nombre:</strong> {planningInstrument.name}</Typography>
         <Typography variant="body2" mt={1}><strong>Misión:</strong></Typography>
-        <Typography variant="body2" paragraph>{entity.mission}</Typography>
+        <Typography variant="body2" paragraph>{planningInstrument.mission}</Typography>
         <Divider sx={{ my: 2 }} />
         <Typography variant="h6" gutterBottom color="primary">
           Instrumento de Planeamiento
         </Typography>
-        <Typography variant="body2"><strong>Tipo de Plan:</strong> {entity.planType}</Typography>
+        <Typography variant="body2"><strong>Tipo de Plan:</strong> {planningInstrument.planType}</Typography>
         <Typography variant="body2">
-          <strong>Horizonte:</strong> {entity.planHorizon.startYear} - {entity.planHorizon.endYear}
+          <strong>Horizonte:</strong> {planningInstrument.planHorizon.startYear} - {planningInstrument.planHorizon.endYear}
         </Typography>
       </Box>
     </Paper>

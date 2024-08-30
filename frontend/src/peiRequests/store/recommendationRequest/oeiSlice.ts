@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { OEIData, IndicatorsResponse } from '../../types/peiType'
-import { Entity } from "../../../generalTypes/entityType"
+import { PlanningInstrument } from "../../../generalTypes/planningInstrumentType"
 
 export type OEIRequestType = number
 
 export interface OEIRecommendationRequest {
-  entity: Entity
+  entity: PlanningInstrument
   oeiData: OEIData
   indicatorsResponse: IndicatorsResponse
 }
@@ -39,7 +39,16 @@ const initialState: OEIRecommendationRequestWithId = {
 export const oeiSlice = createSlice({
   name: 'oeiRequest',
   initialState,
-  reducers: {}
+  reducers: {
+    setOEIData: (state, action: PayloadAction<OEIData>) => {
+      state.oeiData = action.payload;
+    },
+    setIndicatorsResponse: (state, action: PayloadAction<IndicatorsResponse>) => {
+      state.indicatorsResponse = action.payload;
+    },
+    resetOEIRequest: () => initialState,
+  }
 })
 
+export const { setOEIData, setIndicatorsResponse, resetOEIRequest } = oeiSlice.actions;
 export default oeiSlice.reducer

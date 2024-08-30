@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface NavigationState {
-  currentView: 'main' | 'peiRequests';
+  currentView: 'main' | 'peiRequests' | 'pesemRequests'; /* Se agrega a medida que más planes se soporten */
 }
 
 const initialState: NavigationState = {
@@ -12,7 +12,7 @@ const navigationSlice = createSlice({
   name: 'navigation',
   initialState,
   reducers: {
-    setCurrentView: (state, action: PayloadAction<'main' | 'peiRequests'>) => {
+    setCurrentView: (state, action: PayloadAction<'main' | 'peiRequests' | 'pesemRequests'>) => {
       state.currentView = action.payload;
     },
   },

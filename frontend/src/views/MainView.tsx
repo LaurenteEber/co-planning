@@ -14,11 +14,13 @@ import {
   InputLabel,
   FormHelperText
 } from '@mui/material';
-import { Entity } from '../generalTypes/entityType';
-import { setEntity } from '../peiRequests/store/entitySilce';
-import { setCurrentView } from '../peiRequests/store/navigationSlice';
-import { RootState } from '../peiRequests/store';
+import { PlanningInstrument } from '../generalTypes/planningInstrumentType';
+import { setPlanningInstrument } from '../store/planningInstrumentSlice';
+import { setCurrentView } from '../store/navigationSlice';
+import { RootState } from '../store';
 import PEIRequestsManager from '../peiRequests/PEIRequestsManager';
+import PESEMRequestsManager from '../pesemRequests/PESEMRequestsManager';
+
 
 const validateYear = (value: string) => {
   const numValue = Number(value);
@@ -35,20 +37,24 @@ const validateEndYear = (startYear: string, endYear: string) => {
 };
 
 const MainView: React.FC = () => {
-  const { control, handleSubmit, watch } = useForm<Entity>();
+  const { control, handleSubmit, watch } = useForm<PlanningInstrument>();
   const dispatch = useDispatch();
   const [showUnsupportedMessage, setShowUnsupportedMessage] = useState(false);
   const currentView = useSelector((state: RootState) => state.navigation.currentView);
 
   const planType = watch('planType');
 
-  const onSubmit = (data: Entity) => {
-    dispatch(setEntity(data));
-    dispatch(setCurrentView('peiRequests'));
+  const onSubmit = (data: PlanningInstrument) => {
+    dispatch(setPlanningInstrument(data));
+    dispatch(setCurrentView(data.planType === 'PEI' ? 'peiRequests' : 'pesemRequests'));
   };
 
   if (currentView === 'peiRequests') {
     return <PEIRequestsManager />;
+  }
+
+  if (currentView === 'pesemRequests') {
+    return <PESEMRequestsManager />;
   }
 
   return (
@@ -78,7 +84,7 @@ const MainView: React.FC = () => {
                       error={!!error || showUnsupportedMessage}
                       onChange={(e) => {
                         field.onChange(e);
-                        setShowUnsupportedMessage(e.target.value !== 'PEI' && e.target.value !== '');
+                        setShowUnsupportedMessage(e.target.value !== 'PEI' && e.target.value !== 'PESEM' && e.target.value !== '');
                       }}
                     >
                       <MenuItem value="" disabled>Seleccione el tipo de plan</MenuItem>
@@ -98,7 +104,7 @@ const MainView: React.FC = () => {
                 )}
               </FormControl>
             </Grid>
-            {planType === 'PEI' && (
+            {(planType === 'PEI' || planType === 'PESEM') && (
               <>
                 <Grid item xs={6}>
                   <Controller
