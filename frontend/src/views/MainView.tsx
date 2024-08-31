@@ -20,7 +20,7 @@ import { setCurrentView } from '../store/navigationSlice';
 import { RootState } from '../store';
 import PEIRequestsManager from '../peiRequests/PEIRequestsManager';
 import PESEMRequestsManager from '../pesemRequests/PESEMRequestsManager';
-import { getSession, saveSession } from '../utils/localStorage';
+import { getSession} from '../utils/localStorage';
 import { setConsultationHistory } from '../peiRequests/store/consultationHistorySlice';
 import { generateSessionId } from '../utils/sessionUtils';
 

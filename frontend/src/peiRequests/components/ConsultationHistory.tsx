@@ -21,7 +21,7 @@ const ConsultationHistory: React.FC<ConsultationHistoryProps> = ({ history, onSe
         {history.map((consultation) => (
           <ListItem
             key={consultation.id}
-            button
+            component="button"
             onClick={() => onSelectConsultation(consultation)}
           >
             <ListItemText
