@@ -18,9 +18,14 @@ const PEIRequestsManager: React.FC = () => {
 	const planningInstrument = useSelector((state: RootState) => state.planningInstrument);
 	const [selectedElement, setSelectedElement] = useState<'OEI' | 'AEI' | null>(null);
 	const [showIndicators, setShowIndicators] = useState(false);
-
-	const { initialData: oeiInitialData, loadHistory: loadOEIHistory, handleSubmit: handleOEISubmit } = useOEIForm(planningInstrument);
-	const { initialData: aeiInitialData, loadHistory: loadAEIHistory, handleSubmit: handleAEISubmit } = useAEIForm(planningInstrument);
+	const { 
+		initialData: oeiInitialData, 
+		loadHistory: loadOEIHistory, 
+		handleSubmit: handleOEISubmit } = useOEIForm(planningInstrument);
+	const { 
+		initialData: aeiInitialData, 
+		loadHistory: loadAEIHistory, 
+		handleSubmit: handleAEISubmit } = useAEIForm(planningInstrument);
 
 	const handleElementSelect = useCallback((element: 'OEI' | 'AEI') => {
 		setSelectedElement(element);

@@ -22,6 +22,7 @@ import PEIRequestsManager from '../peiRequests/PEIRequestsManager';
 import PESEMRequestsManager from '../pesemRequests/PESEMRequestsManager';
 import { getSession, saveSession } from '../utils/localStorage';
 import { setConsultationHistory } from '../peiRequests/store/consultationHistorySlice';
+import { generateSessionId } from '../utils/sessionUtils';
 
 
 const validateYear = (value: string) => {
@@ -47,7 +48,14 @@ const MainView: React.FC = () => {
   const planType = watch('planType');
 
   const onSubmit = (data: PlanningInstrument) => {
-    dispatch(setPlanningInstrument(data));
+    const sessionId = generateSessionId(data);
+    const existingSession = getSession(sessionId);
+    if (existingSession) {
+      dispatch(setPlanningInstrument(existingSession.planningInstrument));
+      dispatch(setConsultationHistory(existingSession.consultations));
+    } else {
+      dispatch(setPlanningInstrument(data));
+    }
     dispatch(setCurrentView(data.planType === 'PEI' ? 'peiRequests' : 'pesemRequests'));
   };
 
@@ -152,7 +160,7 @@ const MainView: React.FC = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <Controller
-                    name="name"
+                    name="entityName"
                     control={control}
                     defaultValue=""
                     rules={{ required: 'Este campo es requerido' }}
@@ -169,7 +177,7 @@ const MainView: React.FC = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <Controller
-                    name="mission"
+                    name="entityMission"
                     control={control}
                     defaultValue=""
                     rules={{ required: 'Este campo es requerido' }}

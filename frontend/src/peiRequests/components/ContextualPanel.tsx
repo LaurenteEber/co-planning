@@ -21,7 +21,7 @@ const ContextualPanel: React.FC<ContextualPanelProps> = ({ planningInstrument })
         Información del Plan
       </Typography>
       <Typography>Tipo de Plan: {planningInstrument.planType}</Typography>
-      <Typography>Entidad: {planningInstrument.name}</Typography>
+      <Typography>Entidad: {planningInstrument.entityName}</Typography>
       <Typography>
         Horizonte: {planningInstrument.planHorizon.startYear} - {planningInstrument.planHorizon.endYear}
       </Typography>

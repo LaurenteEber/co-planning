@@ -1,7 +1,7 @@
 import { PlanningInstrument } from '../generalTypes/planningInstrumentType';
 import { ConsultationData, OEIConsultationData, AEIConsultationData } from '../peiRequests/types/consultationType';
+import { generateSessionId } from './sessionUtils';
 
-const SESSION_KEY = 'co-planning-session';
 const MAX_CONSULTATIONS = 50;
 
 interface SessionData {
@@ -9,17 +9,17 @@ interface SessionData {
   consultations: ConsultationData[];
 }
 
-export const saveSession = (sessionData: SessionData): void => {
+export const saveSession = (sessionId: string, sessionData: SessionData): void => {
   try {
-    localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+    localStorage.setItem(sessionId, JSON.stringify(sessionData));
   } catch (error) {
     console.error('Error saving session:', error);
   }
 };
 
-export const getSession = (): SessionData | null => {
+export const getSession = (sessionId: string): SessionData | null => {
   try {
-    const sessionData = localStorage.getItem(SESSION_KEY);
+    const sessionData = localStorage.getItem(sessionId);
     return sessionData ? JSON.parse(sessionData) : null;
   } catch (error) {
     console.error('Error getting session:', error);
@@ -32,36 +32,35 @@ export const addConsultation = (
   consultationData: OEIConsultationData | AEIConsultationData
 ): void => {
   try {
-    const session = getSession() || { planningInstrument, consultations: [] };
+    const sessionId = generateSessionId(planningInstrument);
+    const session = getSession(sessionId) || { planningInstrument, consultations: [] };
 
     if (session.consultations.length >= MAX_CONSULTATIONS) {
       session.consultations.shift();
     }
 
     session.consultations.push(consultationData);
-    saveSession(session);
+    saveSession(sessionId, session);
   } catch (error) {
     console.error('Error adding consultation:', error);
   }
 };
 
-export const clearSession = (): void => {
-  try {
-    localStorage.removeItem(SESSION_KEY);
-  } catch (error) {
-    console.error('Error clearing session:', error);
-  }
-};
-
 export const getConsultationHistory = (planningInstrument: PlanningInstrument): ConsultationData[] => {
   try {
-    const session = getSession();
-    if (session && JSON.stringify(session.planningInstrument) === JSON.stringify(planningInstrument)) {
-      return session.consultations;
-    }
-    return [];
+    const sessionId = generateSessionId(planningInstrument);
+    const session = getSession(sessionId);
+    return session ? session.consultations : [];
   } catch (error) {
     console.error('Error getting consultation history:', error);
     return [];
+  }
+};
+
+export const clearSession = (sessionId: string): void => {
+  try {
+    localStorage.removeItem(sessionId);
+  } catch (error) {
+    console.error('Error clearing session:', error);
   }
 };

@@ -4,7 +4,7 @@ export interface PlanningInstrument {
     startYear: string
     endYear: string
   }
-  name: string
-  mission: string
+  entityName: string
+  entityMission: string
 }
 

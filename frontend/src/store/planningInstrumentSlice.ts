@@ -7,8 +7,8 @@ const initialState: PlanningInstrument = {
     startYear: '',
     endYear: ''
   },
-  name: '',
-  mission: ''
+  entityName: '',
+  entityMission: ''
 };
 
 const planningInstrumentSlice = createSlice({

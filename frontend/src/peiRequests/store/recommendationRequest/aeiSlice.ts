@@ -22,8 +22,8 @@ const initialState: AEIRecommendationRequestWithId = {
       startYear: '',
       endYear: ''
     },
-    name: '',
-    mission: ''
+    entityName: '',
+    entityMission: ''
   },
   aeiData: {
     denomination: '',

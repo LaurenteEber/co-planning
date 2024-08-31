@@ -37,7 +37,7 @@
       "containerId": null,
       "originalText": "Frontend\n",
       "lineHeight": 1.25,
-      "baseline": 77
+      "baseline": 76
     },
     {
       "type": "line",
@@ -175,7 +175,7 @@
       "containerId": "GCmp0yghrt7gPRnCxXZZ6",
       "originalText": "Selector\nTipo IP",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 42
     },
     {
       "type": "rectangle",
@@ -249,7 +249,7 @@
       "containerId": "GoZ4X6ljONG_RMqMEjHgj",
       "originalText": "Modelo de datos PN",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 17
     },
     {
       "type": "rectangle",
@@ -323,7 +323,7 @@
       "containerId": "Khzx8_zXgqipA8CWUPDKl",
       "originalText": "Modelo de datos PESEM",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 17
     },
     {
       "type": "rectangle",
@@ -397,7 +397,7 @@
       "containerId": "Ef-3_zZDe5PRpdKe12kAW",
       "originalText": "Modelo de datos PDRC",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 17
     },
     {
       "type": "rectangle",
@@ -471,7 +471,7 @@
       "containerId": "REjFNfUoCaR2IlCaBCE0Q",
       "originalText": "Modelo de datos PDLC-P",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 17
     },
     {
       "type": "rectangle",
@@ -545,7 +545,7 @@
       "containerId": "HQIntdKdKr8-3_OVNMtOq",
       "originalText": "Modelo de datos PDLC-D",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 17
     },
     {
       "type": "rectangle",
@@ -623,7 +623,7 @@
       "containerId": "ntguWOeIe1lE0JcwuhYtg",
       "originalText": "Modelo de datos PEI",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 17
     },
     {
       "type": "arrow",
@@ -1009,7 +1009,7 @@
       "containerId": "FuGg5sE7kKGRK31md8A1M",
       "originalText": "pei = {\n OEI: \n {\n    denominacion: str,\n    tema_misional: str,\n    poblacion_objetivo: str,\n    Efecto_esperado: str,\n  }\n AEI:\n {\n    denominacion: str\n    oei_vinculado: str\n    productos: {\n        denominacion: str,\n        poblacion_objetivo: str,\n        criterio_calidad: str\n    }\n }\n \n}",
       "lineHeight": 1.25,
-      "baseline": 493
+      "baseline": 492
     },
     {
       "type": "rectangle",
@@ -1047,8 +1047,8 @@
     },
     {
       "type": "text",
-      "version": 294,
-      "versionNonce": 885862046,
+      "version": 361,
+      "versionNonce": 537732559,
       "isDeleted": false,
       "id": "lcL4TQBmBZdqPBG0FWAzX",
       "fillStyle": "solid",
@@ -1057,29 +1057,29 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 363.03681019017824,
+      "x": 278.79689624974856,
       "y": 397.1912189875174,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
-      "width": 331.5797424316406,
+      "width": 500.0595703125,
       "height": 25,
       "seed": 360310878,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1724508312724,
+      "updated": 1725117080993,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "Datos de la entidad formuladora",
+      "text": "Datos del instrumento de planeamiento consultado",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "2Oj4KJ9yLkF8QZ18PxR3Z",
-      "originalText": "Datos de la entidad formuladora",
+      "originalText": "Datos del instrumento de planeamiento consultado",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 17
     },
     {
       "type": "rectangle",
@@ -1149,7 +1149,7 @@
       "containerId": "Om62UdhB48r0DfXDZWlPA",
       "originalText": "\nintr_planea = str \nentidad = {\n    Nombre_entidad: str,\n    Mision_entidad: str,\n}",
       "lineHeight": 1.25,
-      "baseline": 143
+      "baseline": 142
     },
     {
       "type": "arrow",
@@ -1448,6 +1448,315 @@
       "originalText": "Hooks\n- Navegación\n- Datos de consulta: oeiData y aeiData\n- Estados de modificación de formularios\n- Estado de envío y recepción.",
       "lineHeight": 1.25,
       "baseline": 164
+    },
+    {
+      "id": "luAX-NkY93petUd4CB_60",
+      "type": "rectangle",
+      "x": 266.34293577157723,
+      "y": 3452.5496047627666,
+      "width": 998.7732366778005,
+      "height": 755.6658409601305,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 748334689,
+      "version": 178,
+      "versionNonce": 842253377,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1725117124893,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "d5klYf-_Pm37no-bWX550",
+      "type": "rectangle",
+      "x": 301.22902429630915,
+      "y": 3491.3784502426684,
+      "width": 930.0853999317784,
+      "height": 411.0579583558924,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 2049861633,
+      "version": 115,
+      "versionNonce": 133996495,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "BhiDXnl0pkOuFDQKC1AB5"
+        }
+      ],
+      "updated": 1725117214445,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "BhiDXnl0pkOuFDQKC1AB5",
+      "type": "text",
+      "x": 306.22902429630915,
+      "y": 3496.3784502426684,
+      "width": 538.4996337890625,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 2127956161,
+      "version": 68,
+      "versionNonce": 580581377,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1725117328499,
+      "link": null,
+      "locked": false,
+      "text": "SESIÓN ID ([TIPO-PLAN]-[AÑO-INICIO]-[AÑO-FIN])",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 17,
+      "containerId": "d5klYf-_Pm37no-bWX550",
+      "originalText": "SESIÓN ID ([TIPO-PLAN]-[AÑO-INICIO]-[AÑO-FIN])",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "wtrE6Q-K7YmDHGTJEOIQR",
+      "type": "rectangle",
+      "x": 377.9667797036245,
+      "y": 3567.9080609390585,
+      "width": 822.0501219550949,
+      "height": 91.20911089626179,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 235496577,
+      "version": 157,
+      "versionNonce": 2089103681,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "TrKItr3hEuRODbgEM14_W"
+        }
+      ],
+      "updated": 1725117212570,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "TrKItr3hEuRODbgEM14_W",
+      "type": "text",
+      "x": 467.5520213452345,
+      "y": 3601.012616387189,
+      "width": 642.879638671875,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 574277089,
+      "version": 145,
+      "versionNonce": 357858063,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1725117237772,
+      "link": null,
+      "locked": false,
+      "text": "CONSULTA ID (OEI-[DENOMINACIÓN]-[FECHA DE CONSULTA])",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17,
+      "containerId": "wtrE6Q-K7YmDHGTJEOIQR",
+      "originalText": "CONSULTA ID (OEI-[DENOMINACIÓN]-[FECHA DE CONSULTA])",
+      "lineHeight": 1.25
+    },
+    {
+      "type": "rectangle",
+      "version": 244,
+      "versionNonce": 68866401,
+      "isDeleted": false,
+      "id": "wJWwJJjTgGHqyizCPZ5K9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 378.88482601840474,
+      "y": 3677.7069012454817,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 822.0501219550949,
+      "height": 91.20911089626179,
+      "seed": 296843919,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "8hfGBiu4REWdzbUoxION2"
+        }
+      ],
+      "updated": 1725117210677,
+      "link": null,
+      "locked": false
+    },
+    {
+      "type": "text",
+      "version": 235,
+      "versionNonce": 1907315183,
+      "isDeleted": false,
+      "id": "8hfGBiu4REWdzbUoxION2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 469.17007986704596,
+      "y": 3710.811456693613,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 641.4796142578125,
+      "height": 25,
+      "seed": 635523247,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1725117246997,
+      "link": null,
+      "locked": false,
+      "fontSize": 20,
+      "fontFamily": 1,
+      "text": "CONSULTA ID (AEI-[DENOMINACIÓN]-[FECHA DE CONSULTA])",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "wJWwJJjTgGHqyizCPZ5K9",
+      "originalText": "CONSULTA ID (AEI-[DENOMINACIÓN]-[FECHA DE CONSULTA])",
+      "lineHeight": 1.25,
+      "baseline": 17
+    },
+    {
+      "type": "rectangle",
+      "version": 260,
+      "versionNonce": 1965613615,
+      "isDeleted": false,
+      "id": "cw0G-Kh54TAAVv7gDkvUg",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 380.5801293683579,
+      "y": 3786.3884217293476,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 822.0501219550949,
+      "height": 91.20911089626179,
+      "seed": 884794369,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "rd9zV7_GOCo9FC9zyA6Ty"
+        }
+      ],
+      "updated": 1725117249350,
+      "link": null,
+      "locked": false
+    },
+    {
+      "type": "text",
+      "version": 256,
+      "versionNonce": 1362263439,
+      "isDeleted": false,
+      "id": "rd9zV7_GOCo9FC9zyA6Ty",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 470.86538321699913,
+      "y": 3819.4929771774787,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 641.4796142578125,
+      "height": 25,
+      "seed": 1583528929,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1725117255757,
+      "link": null,
+      "locked": false,
+      "fontSize": 20,
+      "fontFamily": 1,
+      "text": "CONSULTA ID (AEI-[DENOMINACIÓN]-[FECHA DE CONSULTA])",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cw0G-Kh54TAAVv7gDkvUg",
+      "originalText": "CONSULTA ID (AEI-[DENOMINACIÓN]-[FECHA DE CONSULTA])",
+      "lineHeight": 1.25,
+      "baseline": 17
     }
   ],
   "appState": {

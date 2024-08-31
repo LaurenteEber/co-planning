@@ -17,7 +17,11 @@ export const useAEIForm = (planningInstrument: PlanningInstrument) => {
     const history = getConsultationHistory(planningInstrument);
     const lastAEIConsultation = history.reverse().find(c => c.type === 'AEI');
     if (lastAEIConsultation) {
-      setInitialData(lastAEIConsultation.data as AEIData);
+      const loadedData = lastAEIConsultation.data as AEIData;
+      setInitialData({
+        ...loadedData,
+        products: loadedData.products.length ? loadedData.products : [{ denomination: '', targetPopulation: '', qualityCriteria: '' }]
+      });
     }
   }, [planningInstrument]);
 

@@ -1,9 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import navigationReducer from './navigationSlice';
 import planningInstrumentReducer from './planningInstrumentSlice';
 import nlpReducer from './nlpSlice';
-import oeiReducer from '../peiRequests/store/recommendationRequest/oeiSlice';
-import aeiReducer from '../peiRequests/store/recommendationRequest/aeiSlice';
+import peiReducer from '../peiRequests/store';
 import consultationHistoryReducer from '../peiRequests/store/consultationHistorySlice';
 import { localStorageMiddleware } from '../middleware/localStorageMiddleware';
 
@@ -12,10 +11,7 @@ export const store = configureStore({
     navigation: navigationReducer,
     planningInstrument: planningInstrumentReducer,
     nlp: nlpReducer,
-    pei: {
-      oeiRequest: oeiReducer,
-      aeiRequest: aeiReducer,
-    },
+    pei: peiReducer,
     consultationHistory: consultationHistoryReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -24,3 +20,9 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
