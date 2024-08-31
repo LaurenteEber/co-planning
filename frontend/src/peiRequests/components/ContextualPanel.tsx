@@ -1,41 +1,33 @@
 import React from 'react';
+import { Box, Typography, Divider } from '@mui/material';
 import { PlanningInstrument } from '../../generalTypes/planningInstrumentType';
-import { Box, Typography, Divider, Paper } from '@mui/material';
+import ConsultationHistory from './ConsultationHistory';
+import { useConsultationHistory } from '../hooks/useConsultationHistory';
 
 interface ContextualPanelProps {
   planningInstrument: PlanningInstrument;
 }
 
 const ContextualPanel: React.FC<ContextualPanelProps> = ({ planningInstrument }) => {
+  const { history, loadHistory, selectConsultation } = useConsultationHistory(planningInstrument);
+
+  React.useEffect(() => {
+    loadHistory();
+  }, [loadHistory]);
+
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        width: '250px',
-        height: '100%',
-        backgroundColor: '#f8f9fa',
-        borderRight: '1px solid #e0e0e0',
-        overflowY: 'auto',
-        zIndex: 1,
-      }}
-    >
-      <Box sx={{ padding: '20px' }}>
-        <Typography variant="h6" gutterBottom color="primary">
-          Entidad formuladora
-        </Typography>
-        <Typography variant="body2"><strong>Nombre:</strong> {planningInstrument.name}</Typography>
-        <Typography variant="body2" mt={1}><strong>Misión:</strong></Typography>
-        <Typography variant="body2" paragraph>{planningInstrument.mission}</Typography>
-        <Divider sx={{ my: 2 }} />
-        <Typography variant="h6" gutterBottom color="primary">
-          Instrumento de Planeamiento
-        </Typography>
-        <Typography variant="body2"><strong>Tipo de Plan:</strong> {planningInstrument.planType}</Typography>
-        <Typography variant="body2">
-          <strong>Horizonte:</strong> {planningInstrument.planHorizon.startYear} - {planningInstrument.planHorizon.endYear}
-        </Typography>
-      </Box>
-    </Paper>
+    <Box sx={{ width: 300, padding: 2, borderRight: '1px solid #ccc' }}>
+      <Typography variant="h6" gutterBottom>
+        Información del Plan
+      </Typography>
+      <Typography>Tipo de Plan: {planningInstrument.planType}</Typography>
+      <Typography>Entidad: {planningInstrument.name}</Typography>
+      <Typography>
+        Horizonte: {planningInstrument.planHorizon.startYear} - {planningInstrument.planHorizon.endYear}
+      </Typography>
+      <Divider sx={{ my: 2 }} />
+      <ConsultationHistory history={history} onSelectConsultation={selectConsultation} />
+    </Box>
   );
 };
 

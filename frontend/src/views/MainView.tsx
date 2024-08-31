@@ -20,6 +20,8 @@ import { setCurrentView } from '../store/navigationSlice';
 import { RootState } from '../store';
 import PEIRequestsManager from '../peiRequests/PEIRequestsManager';
 import PESEMRequestsManager from '../pesemRequests/PESEMRequestsManager';
+import { getSession, saveSession } from '../utils/localStorage';
+import { setConsultationHistory } from '../peiRequests/store/consultationHistorySlice';
 
 
 const validateYear = (value: string) => {

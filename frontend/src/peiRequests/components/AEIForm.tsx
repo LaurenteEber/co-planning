@@ -7,12 +7,7 @@ import { AEIData } from '../types/peiType';
 import InfoIcon from '@mui/icons-material/Info';
 import Tooltip from '@mui/material/Tooltip';
 
-interface AEIFormProps {
-  onSubmit: (data: AEIData) => void;
-  initialData: AEIData;
-}
-
-const AEIForm: React.FC<AEIFormProps> = ({ onSubmit, initialData }) => {
+const AEIForm: React.FC<{ onSubmit: (data: AEIData) => void, initialData: AEIData }> = ({ onSubmit, initialData }) => {
   const { control, handleSubmit } = useForm<AEIData>({
     defaultValues: initialData
   });

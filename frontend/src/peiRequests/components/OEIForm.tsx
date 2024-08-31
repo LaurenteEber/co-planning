@@ -3,12 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
 import { OEIData } from '../types/peiType';
 
-interface OEIFormProps {
-  onSubmit: (data: OEIData) => void;
-  initialData: OEIData;
-}
-
-const OEIForm: React.FC<OEIFormProps> = ({ onSubmit, initialData }) => {
+const OEIForm: React.FC<{ onSubmit: (data: OEIData) => void, initialData: OEIData }> = ({ onSubmit, initialData }) => {
   const { control, handleSubmit } = useForm<OEIData>({
     defaultValues: initialData
   });

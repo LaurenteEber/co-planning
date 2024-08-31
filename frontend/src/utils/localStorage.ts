@@ -1,53 +1,67 @@
-import { Entity } from '../generalTypes/planningInstrumentType';
-import { OEIData, AEIData, IndicatorsResponse } from '../peiRequests/types/peiType';
-
-interface ConsultationData {
-  id: string;
-  type: 'OEI' | 'AEI';
-  data: OEIData | AEIData;
-  recommendations: IndicatorsResponse;
-  timestamp: number;
-}
-
-interface SessionData {
-  entity: Entity;
-  consultations: ConsultationData[];
-}
+import { PlanningInstrument } from '../generalTypes/planningInstrumentType';
+import { ConsultationData, OEIConsultationData, AEIConsultationData } from '../peiRequests/types/consultationType';
 
 const SESSION_KEY = 'co-planning-session';
 const MAX_CONSULTATIONS = 50;
 
+interface SessionData {
+  planningInstrument: PlanningInstrument;
+  consultations: ConsultationData[];
+}
+
 export const saveSession = (sessionData: SessionData): void => {
-  localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+  try {
+    localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+  } catch (error) {
+    console.error('Error saving session:', error);
+  }
 };
 
 export const getSession = (): SessionData | null => {
-  const sessionData = localStorage.getItem(SESSION_KEY);
-  return sessionData ? JSON.parse(sessionData) : null;
+  try {
+    const sessionData = localStorage.getItem(SESSION_KEY);
+    return sessionData ? JSON.parse(sessionData) : null;
+  } catch (error) {
+    console.error('Error getting session:', error);
+    return null;
+  }
 };
 
 export const addConsultation = (
-  entity: Entity,
-  consultationData: ConsultationData
+  planningInstrument: PlanningInstrument,
+  consultationData: OEIConsultationData | AEIConsultationData
 ): void => {
-  const session = getSession() || { entity, consultations: [] };
+  try {
+    const session = getSession() || { planningInstrument, consultations: [] };
 
-  if (session.consultations.length >= MAX_CONSULTATIONS) {
-    session.consultations.shift();
+    if (session.consultations.length >= MAX_CONSULTATIONS) {
+      session.consultations.shift();
+    }
+
+    session.consultations.push(consultationData);
+    saveSession(session);
+  } catch (error) {
+    console.error('Error adding consultation:', error);
   }
-
-  session.consultations.push(consultationData);
-  saveSession(session);
 };
 
 export const clearSession = (): void => {
-  localStorage.removeItem(SESSION_KEY);
+  try {
+    localStorage.removeItem(SESSION_KEY);
+  } catch (error) {
+    console.error('Error clearing session:', error);
+  }
 };
 
-export const getConsultationHistory = (entity: Entity): ConsultationData[] => {
-  const session = getSession();
-  if (session && JSON.stringify(session.entity) === JSON.stringify(entity)) {
-    return session.consultations;
+export const getConsultationHistory = (planningInstrument: PlanningInstrument): ConsultationData[] => {
+  try {
+    const session = getSession();
+    if (session && JSON.stringify(session.planningInstrument) === JSON.stringify(planningInstrument)) {
+      return session.consultations;
+    }
+    return [];
+  } catch (error) {
+    console.error('Error getting consultation history:', error);
+    return [];
   }
-  return [];
 };

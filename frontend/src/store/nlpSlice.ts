@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { Entity } from '../generalTypes/planningInstrumentType';
 import { OEIData, AEIData, IndicatorsResponse } from '../peiRequests/types/peiType';
 import { RootState } from './index';
 
@@ -11,18 +10,18 @@ interface NLPState {
 
 export const fetchIndicators = createAsyncThunk<
   IndicatorsResponse,
-  { entity: Entity; data: OEIData | AEIData; type: 'OEI' | 'AEI' },
+  { data: OEIData | AEIData; type: 'OEI' | 'AEI' },
   { rejectValue: string }
 >('nlp/fetchIndicators', async (payload, { rejectWithValue }) => {
   try {
-    // Aquí iría la lógica para hacer la llamada a la API del módulo NLP
     const response = await fetch('/api/nlp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
     if (!response.ok) throw new Error('Network response was not ok');
-    return await response.json();
+    const data: IndicatorsResponse = await response.json();
+    return data;
   } catch (err) {
     return rejectWithValue(`Failed to fetch indicators: ${err}`);
   }
