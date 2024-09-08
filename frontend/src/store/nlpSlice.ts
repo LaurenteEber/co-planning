@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { OEIData, AEIData, IndicatorsResponse } from '../peiRequests/types/peiType';
 import { RootState } from './index';
+import { processOEI, processAEI } from '../services/api';
 
 interface NLPState {
   loading: boolean;
@@ -14,14 +15,13 @@ export const fetchIndicators = createAsyncThunk<
   { rejectValue: string }
 >('nlp/fetchIndicators', async (payload, { rejectWithValue }) => {
   try {
-    const response = await fetch('/api/nlp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    if (!response.ok) throw new Error('Network response was not ok');
-    const data: IndicatorsResponse = await response.json();
-    return data;
+    let response;
+    if (payload.type === 'OEI') {
+      response = await processOEI(payload.data as OEIData);
+    } else {
+      response = await processAEI(payload.data as AEIData);
+    }
+    return response;
   } catch (err) {
     return rejectWithValue(`Failed to fetch indicators: ${err}`);
   }

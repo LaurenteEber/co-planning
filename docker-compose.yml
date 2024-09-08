@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5001:80"
+    depends_on:
+      - api_gateway
+
+  api_gateway:
+    build: ./api_gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - nlp_module
+
+  nlp_module:
+    build: ./nlp_module
+    ports:
+      - "8001:8001"
+
+networks:
+  default:
+    name: co-planning-network

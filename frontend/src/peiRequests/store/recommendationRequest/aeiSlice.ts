@@ -5,7 +5,7 @@ import { PlanningInstrument } from "../../../generalTypes/planningInstrumentType
 export type AEIRequestType = number
 
 export interface AEIRecommendationRequest {
-  entity: PlanningInstrument
+  entity: PlanningInstrument  // TODO: Change to "planningInstrumentInfo"
   aeiData: AEIData
   indicatorsResponse: IndicatorsResponse
 }

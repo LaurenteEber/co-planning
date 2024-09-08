@@ -1,13 +1,13 @@
-import { Middleware } from 'redux';
-import { RootState } from '../store';
-import { saveSession, getSession, addConsultation } from '../utils/localStorage';
+import { Middleware } from '@reduxjs/toolkit';
+import { saveSession, getSession } from '../utils/localStorage';
 import { generateSessionId } from '../utils/sessionUtils';
+import { setPlanningInstrument } from '../store/planningInstrumentSlice';
 
-export const localStorageMiddleware: Middleware<{}, RootState> = store => next => action => {
+
+export const localStorageMiddleware: Middleware = () => (next) => (action) => {
   const result = next(action);
-  const state = store.getState();
 
-  if (action.type === 'planningInstrument/setPlanningInstrument') {
+  if (setPlanningInstrument.match(action)) {
     const sessionId = generateSessionId(action.payload);
     const currentSession = getSession(sessionId);
     if (!currentSession) {
@@ -16,15 +16,6 @@ export const localStorageMiddleware: Middleware<{}, RootState> = store => next =
         consultations: []
       });
     }
-  } else if (action.type === 'pei/setOEIData' || action.type === 'pei/setAEIData') {
-    addConsultation(state.planningInstrument, {
-      id: `${action.type}-${Date.now()}`,
-      type: action.type === 'pei/setOEIData' ? 'OEI' : 'AEI',
-      data: action.payload,
-      recommendations: state.nlp.indicatorsResponse || { indicators: [], message: '' },
-      timestamp: Date.now()
-    });
   }
-
   return result;
 };

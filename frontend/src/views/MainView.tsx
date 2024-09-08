@@ -24,7 +24,6 @@ import { getSession} from '../utils/localStorage';
 import { setConsultationHistory } from '../peiRequests/store/consultationHistorySlice';
 import { generateSessionId } from '../utils/sessionUtils';
 
-
 const validateYear = (value: string) => {
   const numValue = Number(value);
   return (numValue > 2020 && numValue < 2050) || 'Año no soportado';
@@ -56,7 +55,7 @@ const MainView: React.FC = () => {
     } else {
       dispatch(setPlanningInstrument(data));
     }
-    dispatch(setCurrentView(data.planType === 'PEI' ? 'peiRequests' : 'pesemRequests'));
+    dispatch(setCurrentView(data.planType === 'PEI' ? 'peiRequests' : 'pesemRequests')); //TODO: Actualizar para soportar PDRC, PDLC-P, PDLC-D
   };
 
   if (currentView === 'peiRequests') {
@@ -94,7 +93,9 @@ const MainView: React.FC = () => {
                       error={!!error || showUnsupportedMessage}
                       onChange={(e) => {
                         field.onChange(e);
-                        setShowUnsupportedMessage(e.target.value !== 'PEI' && e.target.value !== 'PESEM' && e.target.value !== '');
+                        setShowUnsupportedMessage(
+                          e.target.value !== 'PEI' && e.target.value !== 'PESEM' && e.target.value !== ''
+                        );
                       }}
                     >
                       <MenuItem value="" disabled>Seleccione el tipo de plan</MenuItem>

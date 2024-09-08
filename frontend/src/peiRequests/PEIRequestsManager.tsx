@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography, Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import { RootState } from '../store';
+import { RootState, type AppDispatch } from '../store';
 import ContextualPanel from './components/ContextualPanel';
 import ElementSelector from './components/ElementSelector';
 import OEIForm from './components/OEIForm';
@@ -14,7 +14,7 @@ import { fetchIndicators } from '../store/nlpSlice';
 import { OEIData, AEIData } from './types/peiType';
 
 const PEIRequestsManager: React.FC = () => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const planningInstrument = useSelector((state: RootState) => state.planningInstrument);
 	const [selectedElement, setSelectedElement] = useState<'OEI' | 'AEI' | null>(null);
 	const [showIndicators, setShowIndicators] = useState(false);
@@ -82,7 +82,7 @@ const PEIRequestsManager: React.FC = () => {
 						<AEIForm onSubmit={(data) => handleFormSubmit(data, 'AEI')} initialData={aeiInitialData} />
 					</>
 				)}
-				{showIndicators && <IndicatorsRecommended formData={selectedElement === 'OEI' ? oeiInitialData : aeiInitialData} />}
+				{showIndicators && <IndicatorsRecommended />}
 			</Box>
 		</Box>
 	);
