@@ -9,15 +9,15 @@ class OEIData(BaseModel):
     targetPopulation: str
     expectedEffect: str
 
-class ProductData(BaseModel):
+class Product(BaseModel):
     denomination: str
     targetPopulation: str
     qualityCriteria: str
 
 class AEIData(BaseModel):
     denomination: str
-    contributiongOEI: str
-    product: List[ProductData]
+    contributingOEI: str
+    products: List[Product]
     
 class IndicatorResponse(BaseModel):
     indicators: List[str]

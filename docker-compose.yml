@@ -1,15 +1,13 @@
-version: '3.8'
-
 services:
   frontend:
     build: ./frontend
     ports:
       - "5001:80"
     depends_on:
-      - api_gateway
+      - backend
 
-  api_gateway:
-    build: ./api_gateway
+  backend:
+    build: ./backend
     ports:
       - "8000:8000"
     depends_on:
