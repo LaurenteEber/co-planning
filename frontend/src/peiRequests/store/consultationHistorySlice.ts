@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ConsultationHistoryState, ConsultationData } from '../types/consultationType';
 
+
+
 const initialState: ConsultationHistoryState = {
   consultations: [],
+  selectedConsultation: null,
 };
 
 const consultationHistorySlice = createSlice({
@@ -18,8 +21,11 @@ const consultationHistorySlice = createSlice({
     clearConsultationHistory: (state) => {
       state.consultations = [];
     },
+    setSelectedConsultation: (state, action: PayloadAction<ConsultationData | null>) => {
+      state.selectedConsultation = action.payload;
+    },
   },
 });
 
-export const { setConsultationHistory, addConsultation, clearConsultationHistory } = consultationHistorySlice.actions;
+export const { setConsultationHistory, addConsultation, clearConsultationHistory, setSelectedConsultation } = consultationHistorySlice.actions;
 export default consultationHistorySlice.reducer;

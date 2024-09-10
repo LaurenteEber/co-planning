@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { List, ListItem, ListItemText, Typography, Box, Button } from '@mui/material';
 import { ConsultationData } from '../types/consultationType';
 import { useDispatch } from 'react-redux';
 import { setCurrentView } from '../../store/navigationSlice';
+import { setSelectedConsultation } from '../store/consultationHistorySlice';
 
 interface ConsultationHistoryProps {
   history: ConsultationData[];
@@ -11,6 +12,7 @@ interface ConsultationHistoryProps {
 
 const ConsultationHistory: React.FC<ConsultationHistoryProps> = ({ history, onSelectConsultation }) => {
   const dispatch = useDispatch();
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (
     <Box>
@@ -22,7 +24,17 @@ const ConsultationHistory: React.FC<ConsultationHistoryProps> = ({ history, onSe
           <ListItem
             key={consultation.id}
             component="button"
-            onClick={() => onSelectConsultation(consultation)}
+            onClick={() => {
+              onSelectConsultation(consultation);
+              dispatch(setSelectedConsultation(consultation));
+              setSelectedId(consultation.id);
+            }}
+            sx={{
+              backgroundColor: selectedId === consultation.id ? 'rgba(0, 0, 255, 0.1)' : 'transparent',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 255, 0.2)',
+              },
+            }}
           >
             <ListItemText
               primary={`${consultation.type} - ${new Date(consultation.timestamp).toLocaleDateString()}`}

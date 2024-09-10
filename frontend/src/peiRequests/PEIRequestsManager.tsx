@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography, Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
@@ -26,6 +26,19 @@ const PEIRequestsManager: React.FC = () => {
 		initialData: aeiInitialData, 
 		loadHistory: loadAEIHistory, 
 		handleSubmit: handleAEISubmit } = useAEIForm(planningInstrument);
+	const selectedConsultation = useSelector((state: RootState) => state.consultationHistory.selectedConsultation);
+
+	useEffect(() => {
+		if (selectedConsultation) {
+			if (selectedConsultation.type === 'OEI') {
+				setSelectedElement('OEI');
+				setShowIndicators(true);
+			} else if (selectedConsultation.type === 'AEI') {
+				setSelectedElement('AEI');
+				setShowIndicators(true);
+			}
+		}
+	}, [selectedConsultation]);
 
 	const handleElementSelect = useCallback((element: 'OEI' | 'AEI') => {
 		setSelectedElement(element);
@@ -68,7 +81,7 @@ const PEIRequestsManager: React.FC = () => {
 								<InfoIcon fontSize="small" sx={{ marginLeft: 1, cursor: 'pointer' }} />
 							</Tooltip>
 						</Typography>
-						<OEIForm onSubmit={(data) => handleFormSubmit(data, 'OEI')} initialData={oeiInitialData} />
+						<OEIForm onSubmit={(data) => handleFormSubmit(data, 'OEI')} initialData={selectedConsultation?.data || oeiInitialData} />
 					</>
 				)}
 				{selectedElement === 'AEI' && (
@@ -79,7 +92,7 @@ const PEIRequestsManager: React.FC = () => {
 								<InfoIcon fontSize="small" sx={{ marginLeft: 1, cursor: 'pointer' }} />
 							</Tooltip>
 						</Typography>
-						<AEIForm onSubmit={(data) => handleFormSubmit(data, 'AEI')} initialData={aeiInitialData} />
+						<AEIForm onSubmit={(data) => handleFormSubmit(data, 'AEI')} initialData={selectedConsultation?.data || aeiInitialData} />
 					</>
 				)}
 				{showIndicators && <IndicatorsRecommended />}

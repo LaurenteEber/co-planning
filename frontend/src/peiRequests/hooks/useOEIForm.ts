@@ -1,9 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { OEIData } from '../types/peiType';
 import { setOEIData } from '../store/recommendationRequest/oeiSlice';
 import { addConsultation, getConsultationHistory } from '../../utils/localStorage';
 import { PlanningInstrument } from '../../generalTypes/planningInstrumentType';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/index';
 
 export const useOEIForm = (planningInstrument: PlanningInstrument) => {
   const dispatch = useDispatch();
@@ -31,6 +33,14 @@ export const useOEIForm = (planningInstrument: PlanningInstrument) => {
       timestamp: Date.now()
     });
   }, [dispatch, planningInstrument]);
+
+  const selectedConsultation = useSelector((state: RootState) => state.consultationHistory.selectedConsultation);
+
+  useEffect(() => {
+    if (selectedConsultation && selectedConsultation.type === 'OEI') {
+      setInitialData(selectedConsultation.data as OEIData);
+    }
+  }, [selectedConsultation]);
 
   return { initialData, loadHistory, handleSubmit };
 };

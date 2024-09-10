@@ -21,10 +21,11 @@ const ContextualPanel: React.FC<ContextualPanelProps> = ({ planningInstrument })
         Información del Plan
       </Typography>
       <Typography>Tipo de Plan: {planningInstrument.planType}</Typography>
-      <Typography>Entidad: {planningInstrument.entityName}</Typography>
       <Typography>
         Horizonte: {planningInstrument.planHorizon.startYear} - {planningInstrument.planHorizon.endYear}
       </Typography>
+      <Typography>Entidad: {planningInstrument.entityName}</Typography>
+      <Typography>Mision: {planningInstrument.entityMission}</Typography>
       <Divider sx={{ my: 2 }} />
       <ConsultationHistory history={history} onSelectConsultation={selectConsultation} />
     </Box>

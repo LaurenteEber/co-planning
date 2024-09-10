@@ -11,7 +11,7 @@ const AEIForm: React.FC<{ onSubmit: (data: AEIData) => void, initialData: AEIDat
   const { control, handleSubmit } = useForm<AEIData>({
     defaultValues: {
       ...initialData,
-      products: initialData.products.length ? initialData.products : [{ denomination: '', targetPopulation: '', qualityCriteria: '' }]
+      products: initialData.products?.length ? initialData.products : [{ denomination: '', targetPopulation: '', qualityCriteria: '' }]
     }
   });
   const { fields, append, remove } = useFieldArray({

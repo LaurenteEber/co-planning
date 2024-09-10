@@ -22,4 +22,5 @@ export type ConsultationData = OEIConsultationData | AEIConsultationData;
 
 export interface ConsultationHistoryState {
   consultations: ConsultationData[];
+  selectedConsultation: ConsultationData | null;
 }

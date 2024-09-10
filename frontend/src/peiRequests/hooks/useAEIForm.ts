@@ -1,9 +1,11 @@
-import { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AEIData } from '../types/peiType';
 import { setAEIData } from '../store/recommendationRequest/aeiSlice';
 import { addConsultation, getConsultationHistory } from '../../utils/localStorage';
 import { PlanningInstrument } from '../../generalTypes/planningInstrumentType';
+import { RootState } from '../../store/index';
+
 
 export const useAEIForm = (planningInstrument: PlanningInstrument) => {
   const dispatch = useDispatch();
@@ -20,7 +22,7 @@ export const useAEIForm = (planningInstrument: PlanningInstrument) => {
       const loadedData = lastAEIConsultation.data as AEIData;
       setInitialData({
         ...loadedData,
-        products: loadedData.products.length ? loadedData.products : [{ denomination: '', targetPopulation: '', qualityCriteria: '' }]
+        products: loadedData.products?.length ? loadedData.products : [{ denomination: '', targetPopulation: '', qualityCriteria: '' }]
       });
     }
   }, [planningInstrument]);
@@ -35,6 +37,17 @@ export const useAEIForm = (planningInstrument: PlanningInstrument) => {
       timestamp: Date.now()
     });
   }, [dispatch, planningInstrument]);
+
+  const selectedConsultation = useSelector((state: RootState) => state.consultationHistory.selectedConsultation);
+
+  useEffect(() => {
+    if (selectedConsultation && selectedConsultation.type === 'AEI') {
+      setInitialData({
+        ...selectedConsultation.data,
+        products: selectedConsultation.data.products?.length ? selectedConsultation.data.products : [{ denomination: '', targetPopulation: '', qualityCriteria: '' }]
+      } as AEIData);
+    }
+  }, [selectedConsultation]);
 
   return { initialData, loadHistory, handleSubmit };
 };
