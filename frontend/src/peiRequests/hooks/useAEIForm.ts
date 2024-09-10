@@ -6,7 +6,6 @@ import { addConsultation, getConsultationHistory } from '../../utils/localStorag
 import { PlanningInstrument } from '../../generalTypes/planningInstrumentType';
 import { RootState } from '../../store/index';
 
-
 export const useAEIForm = (planningInstrument: PlanningInstrument) => {
   const dispatch = useDispatch();
   const [initialData, setInitialData] = useState<AEIData>({
