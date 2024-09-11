@@ -62,9 +62,11 @@ const PEIRequestsManager: React.FC = () => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
-      <Box sx={{ width: '100%', maxWidth: 1200, display: 'flex', flexGrow: 1 }}>
+      <Box sx={{ width: '300px', borderRight: '1px solid #ccc', flexShrink: 0 }}>
         <ContextualPanel planningInstrument={planningInstrument} />
-        <Box sx={{ flexGrow: 1, padding: '20px', overflowY: 'auto' }}>
+      </Box>
+      <Box sx={{ flexGrow: 1, padding: '20px', display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ width: '100%', maxWidth: '800px', overflowY: 'auto' }}>
           <Typography variant="h6" gutterBottom color="primary" sx={{ display: 'flex', alignItems: 'center' }}>
             Seleccione el elemento del PEI
             <Tooltip title="Elija entre OEI o AEI">

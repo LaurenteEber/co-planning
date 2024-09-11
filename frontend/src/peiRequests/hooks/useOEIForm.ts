@@ -32,7 +32,8 @@ export const useOEIForm = (planningInstrument: PlanningInstrument) => {
       recommendations: { indicators: [], message: '' },
       timestamp: Date.now()
     });
-  }, [dispatch, planningInstrument]);
+    loadHistory(); // Asegurarse de que el historial se recargue
+  }, [dispatch, planningInstrument, loadHistory]);
 
   const selectedConsultation = useSelector((state: RootState) => state.consultationHistory.selectedConsultation);
 

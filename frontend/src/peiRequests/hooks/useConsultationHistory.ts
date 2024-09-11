@@ -25,7 +25,8 @@ export const useConsultationHistory = (planningInstrument: PlanningInstrument) =
     } else {
       dispatch(setAEIData(consultation.data));
     }
-  }, [dispatch]);
+    loadHistory(); // Asegurarse de que el historial se recargue
+  }, [dispatch, loadHistory]);
 
   return { history, loadHistory, selectConsultation };
 };

@@ -15,34 +15,36 @@ const ConsultationHistory: React.FC<ConsultationHistoryProps> = ({ history, onSe
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (
-    <Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Typography variant="h6" gutterBottom>
         Historial de Consultas
       </Typography>
-      <List>
-        {history.map((consultation) => (
-          <ListItem
-            key={consultation.id}
-            component="button"
-            onClick={() => {
-              onSelectConsultation(consultation);
-              dispatch(setSelectedConsultation(consultation));
-              setSelectedId(consultation.id);
-            }}
-            sx={{
-              backgroundColor: selectedId === consultation.id ? 'rgba(0, 0, 255, 0.1)' : 'transparent',
-              '&:hover': {
-                backgroundColor: 'rgba(0, 0, 255, 0.2)',
-              },
-            }}
-          >
-            <ListItemText
-              primary={`${consultation.type} - ${new Date(consultation.timestamp).toLocaleDateString()}`}
-              secondary={consultation.data.denomination}
-            />
-          </ListItem>
-        ))}
-      </List>
+      <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
+        <List>
+          {history.map((consultation) => (
+            <ListItem
+              key={consultation.id}
+              component="button"
+              onClick={() => {
+                onSelectConsultation(consultation);
+                dispatch(setSelectedConsultation(consultation));
+                setSelectedId(consultation.id);
+              }}
+              sx={{
+                backgroundColor: selectedId === consultation.id ? 'rgba(0, 0, 255, 0.1)' : 'transparent',
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                },
+              }}
+            >
+              <ListItemText
+                primary={`${consultation.type} - ${new Date(consultation.timestamp).toLocaleDateString()}`}
+                secondary={consultation.data.denomination}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Box>
       <Button 
         variant="contained" 
         color="secondary" 
